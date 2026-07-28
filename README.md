@@ -64,7 +64,14 @@ This project follows [Semantic Versioning](https://semver.org/):
 
 See [CHANGELOG.md](./CHANGELOG.md) for release notes.
 
-## Privacy
+## Deploy (GitHub Pages)
+
+This repo deploys the Vite `dist/` build to GitHub Pages via GitHub Actions on every push to `main`.
+
+Live URL: https://dubeyaditya29.github.io/mobileTelePromp/
+
+In the GitHub repo settings, set **Pages → Source** to **GitHub Actions** (not “Deploy from a branch”).
+
 
 Scripts are stored in `localStorage` on the device. Video is recorded in-memory and only leaves the device if you download or share it. There is no backend in v0.1.0.
 

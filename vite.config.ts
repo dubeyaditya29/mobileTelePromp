@@ -2,8 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+const base = '/mobileTelePromp/'
+
 // https://vite.dev/config/
 export default defineConfig({
+  base,
   plugins: [
     react(),
     VitePWA({
@@ -18,7 +21,8 @@ export default defineConfig({
         background_color: '#0f1210',
         display: 'standalone',
         orientation: 'any',
-        start_url: '/',
+        start_url: base,
+        scope: base,
         lang: 'en',
         categories: ['productivity', 'video'],
         icons: [
