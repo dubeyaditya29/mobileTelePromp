@@ -66,11 +66,15 @@ See [CHANGELOG.md](./CHANGELOG.md) for release notes.
 
 ## Deploy (GitHub Pages)
 
-This repo deploys the Vite `dist/` build to GitHub Pages via GitHub Actions on every push to `main`.
-
 Live URL: https://dubeyaditya29.github.io/mobileTelePromp/
 
-In the GitHub repo settings, set **Pages → Source** to **GitHub Actions** (not “Deploy from a branch”).
+Every push to `main` builds the app and publishes the `dist/` output to the `gh-pages` branch.
+
+**Required once in GitHub → Settings → Pages:**
+
+1. **Source:** Deploy from a branch
+2. **Branch:** `gh-pages` / `/ (root)`
+3. Save, wait ~1 minute, then hard-refresh the site
 
 
 Scripts are stored in `localStorage` on the device. Video is recorded in-memory and only leaves the device if you download or share it. There is no backend in v0.1.0.
