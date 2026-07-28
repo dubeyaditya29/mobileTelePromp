@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { ScriptEditor } from './components/ScriptEditor'
 import { RecorderView } from './components/RecorderView'
 import { ReviewPanel } from './components/ReviewPanel'
+import { OnboardingGate } from './components/OnboardingGate'
 import { loadScript, saveScript } from './lib/storage'
 import type { AppView, ScriptState, TeleprompterSettings } from './types'
 import './App.css'
@@ -37,6 +38,8 @@ function App() {
 
   return (
     <div className={`app app-${view}`}>
+      <OnboardingGate />
+
       {view === 'edit' && (
         <ScriptEditor
           title={script.title}

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { downloadBlob, shareBlob } from '../lib/download'
+import { saveBlob, shareBlob } from '../lib/download'
 
 interface ReviewPanelProps {
   blob: Blob
@@ -17,6 +17,8 @@ export function ReviewPanel({
   onBackToEditor,
 }: ReviewPanelProps) {
   const [url, setUrl] = useState('')
+  const [saveNote, setSaveNote] = useState<string | null>(null)
+  const [saving, setSaving] = useState(false)
   const filename = useMemo(
     () => `${slugify(title) || 'teleprompter'}-${Date.now()}.${fileExtension}`,
     [title, fileExtension, blob],
@@ -28,12 +30,34 @@ export function ReviewPanel({
     return () => URL.revokeObjectURL(objectUrl)
   }, [blob])
 
+  async function handleSave() {
+    setSaving(true)
+    setSaveNote(null)
+    try {
+      const result = await saveBlob(blob, filename)
+      if (result === 'saved') {
+        setSaveNote('Saved to the location you chose.')
+      } else if (result === 'shared') {
+        setSaveNote('Opened share sheet — pick Save to Files or a folder.')
+      } else if (result === 'downloaded') {
+        setSaveNote('Download started. Check your Downloads folder.')
+      }
+      // cancelled → no note
+    } catch {
+      setSaveNote('Could not save the video. Try Share instead.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   async function handleShare() {
     try {
       const shared = await shareBlob(blob, filename)
-      if (!shared) downloadBlob(blob, filename)
+      if (!shared) {
+        await handleSave()
+      }
     } catch {
-      downloadBlob(blob, filename)
+      await handleSave()
     }
   }
 
@@ -43,20 +67,23 @@ export function ReviewPanel({
         <p className="eyebrow">Review</p>
         <h1>Your take is ready</h1>
         <p className="lede">
-          Preview the clip, download it, or share it. Everything stays on your
-          device unless you choose to share.
+          Preview the clip, then choose where to save it. Everything stays on
+          your device unless you share it.
         </p>
       </header>
 
       {url && <video className="review-video" src={url} controls playsInline />}
 
+      {saveNote && <p className="hint save-note">{saveNote}</p>}
+
       <div className="actions">
         <button
           type="button"
           className="btn primary"
-          onClick={() => downloadBlob(blob, filename)}
+          disabled={saving}
+          onClick={() => void handleSave()}
         >
-          Download video
+          {saving ? 'Saving…' : 'Download / choose location'}
         </button>
         <button type="button" className="btn" onClick={() => void handleShare()}>
           Share

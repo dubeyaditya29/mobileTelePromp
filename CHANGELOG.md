@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Onboarding prompts for camera/mic permission and Add to Home Screen shortcut
+- Download flow asks for a save location via the system file picker when supported
+
 ### Fixed
 
 - GitHub Pages blank screen: set Vite `base` to `/mobileTelePromp/` and deploy the production build via Actions
