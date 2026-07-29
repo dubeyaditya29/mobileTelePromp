@@ -1,4 +1,4 @@
-export type AppView = 'edit' | 'record' | 'review'
+export type AppView = 'edit' | 'record' | 'review' | 'about' | 'privacy'
 
 export type FacingMode = 'user' | 'environment'
 
@@ -27,7 +27,7 @@ export const DEFAULT_SETTINGS: TeleprompterSettings = {
 
 export const DEFAULT_SCRIPT: ScriptState = {
   title: 'Untitled script',
-  body: `Welcome to Mobile TelePromp.
+  body: `Welcome to ScrollTake.
 
 Paste your script here, set the scroll speed and font size, then tap Record.
 

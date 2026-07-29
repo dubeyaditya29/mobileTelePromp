@@ -2,27 +2,28 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-const base = '/mobileTelePromp/'
+// App must live at the DOMAIN ROOT for AdSense ads.txt verification.
+// Deploy to: https://dubeyaditya29.github.io/  (not /mobileTelePromp/)
+const base = '/'
 
-// https://vite.dev/config/
 export default defineConfig({
   base,
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'ads.txt'],
       manifest: {
-        name: 'Mobile TelePromp',
-        short_name: 'TelePromp',
+        name: 'ScrollTake',
+        short_name: 'ScrollTake',
         description:
           'Record talking-head videos with a scrolling teleprompter script — right in your browser.',
         theme_color: '#0f1210',
         background_color: '#0f1210',
         display: 'standalone',
         orientation: 'any',
-        start_url: base,
-        scope: base,
+        start_url: '/',
+        scope: '/',
         lang: 'en',
         categories: ['productivity', 'video'],
         icons: [
@@ -45,7 +46,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,txt}'],
       },
       devOptions: {
         enabled: false,

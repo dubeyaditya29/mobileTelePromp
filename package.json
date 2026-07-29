@@ -1,8 +1,8 @@
 {
-  "name": "mobile-telepromp",
+  "name": "scrolltake",
   "private": true,
-  "version": "0.1.0",
-  "description": "A mobile-first PWA teleprompter for recording video with scrolling scripts — no app install required.",
+  "version": "0.2.0",
+  "description": "ScrollTake — a free PWA teleprompter for recording video with scrolling scripts.",
   "type": "module",
   "license": "MIT",
   "engines": {

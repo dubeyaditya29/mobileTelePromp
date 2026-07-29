@@ -3,6 +3,8 @@ import { ScriptEditor } from './components/ScriptEditor'
 import { RecorderView } from './components/RecorderView'
 import { ReviewPanel } from './components/ReviewPanel'
 import { OnboardingGate } from './components/OnboardingGate'
+import { InfoPage } from './components/InfoPage'
+import { AdSenseLoader } from './components/AdSenseLoader'
 import { loadScript, saveScript } from './lib/storage'
 import type { AppView, ScriptState, TeleprompterSettings } from './types'
 import './App.css'
@@ -38,6 +40,7 @@ function App() {
 
   return (
     <div className={`app app-${view}`}>
+      <AdSenseLoader />
       <OnboardingGate />
 
       {view === 'edit' && (
@@ -49,6 +52,8 @@ function App() {
           onBodyChange={(body) => setScript((current) => ({ ...current, body }))}
           onSettingsChange={updateSettings}
           onStartRecording={() => setView('record')}
+          onOpenAbout={() => setView('about')}
+          onOpenPrivacy={() => setView('privacy')}
         />
       )}
 
@@ -75,6 +80,10 @@ function App() {
             setView('edit')
           }}
         />
+      )}
+
+      {(view === 'about' || view === 'privacy') && (
+        <InfoPage page={view} onBack={() => setView('edit')} />
       )}
     </div>
   )

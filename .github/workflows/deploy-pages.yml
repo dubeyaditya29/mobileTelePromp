@@ -30,15 +30,35 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_ADSENSE_CLIENT_ID: ${{ secrets.VITE_ADSENSE_CLIENT_ID }}
+          VITE_ADSENSE_SLOT_EDITOR: ${{ secrets.VITE_ADSENSE_SLOT_EDITOR }}
+          VITE_ADSENSE_SLOT_REVIEW: ${{ secrets.VITE_ADSENSE_SLOT_REVIEW }}
 
       - name: Prepare Pages payload
         run: |
           touch dist/.nojekyll
+          # Ensure ads.txt is present at site root for AdSense crawlers
+          test -f dist/ads.txt
 
-      - name: Deploy to gh-pages
+      # Project pages (old URL) — keep updated for now
+      - name: Deploy to mobileTelePromp gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true
+          enable_jekyll: false
+
+      # Root user site for AdSense (https://dubeyaditya29.github.io/)
+      # Requires repo dubeyaditya29/dubeyaditya29.github.io + secret SITE_DEPLOY_TOKEN (PAT with repo scope)
+      - name: Deploy to user site root
+        if: ${{ secrets.SITE_DEPLOY_TOKEN != '' }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.SITE_DEPLOY_TOKEN }}
+          external_repository: dubeyaditya29/dubeyaditya29.github.io
+          publish_branch: main
           publish_dir: ./dist
           force_orphan: true
           enable_jekyll: false

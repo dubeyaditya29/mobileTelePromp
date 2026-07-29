@@ -1,4 +1,6 @@
 import type { TeleprompterSettings } from '../types'
+import { APP_NAME, APP_TAGLINE, ADSENSE_SLOT_EDITOR } from '../lib/brand'
+import { AdSlot } from './AdSlot'
 
 interface ScriptEditorProps {
   title: string
@@ -8,6 +10,8 @@ interface ScriptEditorProps {
   onBodyChange: (body: string) => void
   onSettingsChange: (patch: Partial<TeleprompterSettings>) => void
   onStartRecording: () => void
+  onOpenAbout: () => void
+  onOpenPrivacy: () => void
 }
 
 export function ScriptEditor({
@@ -18,6 +22,8 @@ export function ScriptEditor({
   onBodyChange,
   onSettingsChange,
   onStartRecording,
+  onOpenAbout,
+  onOpenPrivacy,
 }: ScriptEditorProps) {
   const wordCount = body.trim() ? body.trim().split(/\s+/).length : 0
 
@@ -25,8 +31,8 @@ export function ScriptEditor({
     <section className="panel editor">
       <header className="panel-header">
         <div>
-          <p className="eyebrow">Mobile TelePromp</p>
-          <h1>Write. Scroll. Record.</h1>
+          <p className="eyebrow">{APP_NAME}</p>
+          <h1>{APP_TAGLINE}</h1>
           <p className="lede">
             A browser teleprompter for talking-head videos — open the link, grant
             camera access, and record. No app store install.
@@ -133,6 +139,17 @@ export function ScriptEditor({
           Open recorder
         </button>
       </div>
+
+      <AdSlot slot={ADSENSE_SLOT_EDITOR} className="ad-slot-editor" />
+
+      <nav className="footer-links">
+        <button type="button" className="linkish" onClick={onOpenAbout}>
+          About
+        </button>
+        <button type="button" className="linkish" onClick={onOpenPrivacy}>
+          Privacy
+        </button>
+      </nav>
     </section>
   )
 }

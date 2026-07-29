@@ -9,6 +9,7 @@ import {
   saveOnboardingState,
   type OnboardingState,
 } from '../lib/onboarding'
+import { APP_NAME } from '../lib/brand'
 
 type Step = 'loading' | 'permissions' | 'install' | null
 
@@ -98,7 +99,6 @@ export function OnboardingGate() {
       persist({ installDismissed: true })
       setStep(null)
     }
-    // unavailable → leave card open so user can follow manual steps / Continue
   }
 
   function dismissInstall() {
@@ -113,7 +113,7 @@ export function OnboardingGate() {
       <div className="gate-card">
         {step === 'loading' && (
           <>
-            <p className="eyebrow">Mobile TelePromp</p>
+            <p className="eyebrow">{APP_NAME}</p>
             <h2 id="gate-title">Getting ready…</h2>
             <p className="lede">Checking camera access and install options.</p>
           </>
@@ -124,9 +124,9 @@ export function OnboardingGate() {
             <p className="eyebrow">Before you start</p>
             <h2 id="gate-title">Allow camera & microphone</h2>
             <p className="lede">
-              Mobile TelePromp needs camera and microphone access to record your
-              video. Nothing is uploaded — clips stay on your device unless you
-              download or share them.
+              {APP_NAME} needs camera and microphone access to record your video.
+              Nothing is uploaded — clips stay on your device unless you download
+              or share them.
             </p>
             <ul className="gate-list">
               <li>Camera for your talking-head video</li>
@@ -152,7 +152,7 @@ export function OnboardingGate() {
         {step === 'install' && (
           <>
             <p className="eyebrow">Add shortcut</p>
-            <h2 id="gate-title">Add TelePromp to your home screen</h2>
+            <h2 id="gate-title">Add {APP_NAME} to your home screen</h2>
             <p className="lede">
               Install it like an app for one-tap access — no App Store needed.
             </p>
@@ -190,15 +190,6 @@ export function OnboardingGate() {
                   when it appears.
                 </p>
                 <div className="actions">
-                  <button
-                    type="button"
-                    className="btn primary"
-                    onClick={() => void handleInstall()}
-                    disabled={!install.canInstall}
-                    style={{ display: install.canInstall ? undefined : 'none' }}
-                  >
-                    Add shortcut
-                  </button>
                   <button type="button" className="btn primary" onClick={dismissInstall}>
                     Continue
                   </button>

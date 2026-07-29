@@ -1,19 +1,27 @@
-# Mobile TelePromp
+# ScrollTake
 
-**Version:** 0.1.0  
+**Version:** 0.2.0  
 **Type:** Progressive Web App (PWA)
 
-A mobile-first teleprompter you open in the browser. Paste a script, set scroll speed and text size, then record with your phone camera — no App Store install required.
+A free browser teleprompter. Paste a script, set scroll speed and text size, then record with your phone camera — no App Store install.
 
-## Features (v0.1.0)
+## Live site (for AdSense)
+
+**Root URL (correct for Google):** https://dubeyaditya29.github.io/
+
+Google needs `ads.txt` at the domain root. That only works when the app is served at `/`, not at `/mobileTelePromp/`.
+
+Setup steps: [docs/adsense-setup.md](./docs/adsense-setup.md)
+
+## Features
 
 - Script editor with local autosave
-- Scroll speed, font size, line height, mirror, and countdown controls
-- Front / rear camera preview
-- Record camera + microphone via `MediaRecorder`
-- Pause / resume scrolling while recording
-- Review, download, and share the recorded clip
-- Installable PWA (Add to Home Screen)
+- Scroll speed, font size, line height, mirror, and countdown
+- Camera record + scrolling teleprompter
+- Download / share recordings
+- Installable PWA
+- About + Privacy pages
+- Optional Google AdSense slots (off until you set env IDs)
 
 ## Quick start
 
@@ -22,62 +30,18 @@ npm install
 npm run dev
 ```
 
-Open the printed local URL on your machine. For a real phone test, use HTTPS (or your LAN URL over trusted setup) because browsers require a secure context for camera access.
-
-### Scripts
+## Scripts
 
 | Command | Description |
 |--------|-------------|
 | `npm run dev` | Start Vite dev server |
 | `npm run build` | Typecheck + production build |
 | `npm run preview` | Preview the production build |
-| `npm run typecheck` | TypeScript project references check |
-| `npm run lint` | Alias of typecheck for CI simplicity |
+| `npm run typecheck` | TypeScript check |
 
-## Requirements
+## Privacy
 
-- **Node.js** `>= 20.16`
-- Modern Chromium, Safari, or Firefox
-- HTTPS in production (camera / mic APIs)
-
-## Project layout
-
-```
-src/
-  components/     UI: editor, recorder, scroller, review
-  hooks/          Camera, MediaRecorder, teleprompter scroll
-  lib/            Storage, mime selection, download/share
-  types.ts        Shared types + defaults
-docs/
-  architecture.md
-  roadmap.md
-  browser-support.md
-```
-
-## Versioning
-
-This project follows [Semantic Versioning](https://semver.org/):
-
-- **MAJOR** — breaking UX or API changes
-- **MINOR** — new features, backward compatible
-- **PATCH** — bug fixes and small improvements
-
-See [CHANGELOG.md](./CHANGELOG.md) for release notes.
-
-## Deploy (GitHub Pages)
-
-Live URL: https://dubeyaditya29.github.io/mobileTelePromp/
-
-Every push to `main` builds the app and publishes the `dist/` output to the `gh-pages` branch.
-
-**Required once in GitHub → Settings → Pages:**
-
-1. **Source:** Deploy from a branch
-2. **Branch:** `gh-pages` / `/ (root)`
-3. Save, wait ~1 minute, then hard-refresh the site
-
-
-Scripts are stored in `localStorage` on the device. Video is recorded in-memory and only leaves the device if you download or share it. There is no backend in v0.1.0.
+Scripts stay in `localStorage` on your device. Video is recorded in the browser and only leaves the device if you download or share it.
 
 ## License
 

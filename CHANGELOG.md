@@ -7,14 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-07-29
+
+### Changed
+
+- Rebranded product name to **ScrollTake**
+- Deploy base path is `/` so the app can live at the GitHub user-site root (required for AdSense `ads.txt`)
+
 ### Added
 
-- Onboarding prompts for camera/mic permission and Add to Home Screen shortcut
-- Download flow asks for a save location via the system file picker when supported
+- `ads.txt` at site root for AdSense verification
+- Optional AdSense loader + Editor/Review ad slots (env-gated)
+- About and Privacy pages
+- AdSense setup guide in `docs/adsense-setup.md`
 
-### Fixed
-
-- GitHub Pages blank screen: set Vite `base` to `/mobileTelePromp/` and deploy the production build via Actions
+## [0.1.0] — 2026-07-29
 
 ## [0.1.0] — 2026-07-29
 
