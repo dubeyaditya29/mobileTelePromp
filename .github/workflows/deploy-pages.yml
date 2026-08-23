@@ -15,6 +15,10 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      # secrets context is not allowed in step-level `if:` conditions,
+      # so expose the secret as an env var and check that instead.
+      SITE_DEPLOY_TOKEN: ${{ secrets.SITE_DEPLOY_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,7 +57,7 @@ jobs:
       # Root user site for AdSense (https://dubeyaditya29.github.io/)
       # Requires repo dubeyaditya29/dubeyaditya29.github.io + secret SITE_DEPLOY_TOKEN (PAT with repo scope)
       - name: Deploy to user site root
-        if: ${{ secrets.SITE_DEPLOY_TOKEN != '' }}
+        if: ${{ env.SITE_DEPLOY_TOKEN != '' }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.SITE_DEPLOY_TOKEN }}
