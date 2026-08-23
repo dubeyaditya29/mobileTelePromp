@@ -49,18 +49,6 @@ export function InfoPage({ page, onBack }: InfoPageProps) {
               stay on your device unless you download or share them yourself.
             </p>
             <p>
-              <strong>Ads:</strong> if Google AdSense is enabled on this site,
-              Google may use cookies or similar technologies to show ads. See{' '}
-              <a
-                href="https://policies.google.com/technologies/ads"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Google’s advertising policies
-              </a>
-              .
-            </p>
-            <p>
               You can clear this site’s data in your browser settings to remove
               saved scripts and preferences.
             </p>

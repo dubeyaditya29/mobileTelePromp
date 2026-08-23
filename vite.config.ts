@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// App must live at the DOMAIN ROOT for AdSense ads.txt verification.
+// App lives at the DOMAIN ROOT.
 // Deploy to: https://dubeyaditya29.github.io/  (not /mobileTelePromp/)
 const base = '/'
 
@@ -12,7 +12,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'ads.txt'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'ScrollTake',
         short_name: 'ScrollTake',

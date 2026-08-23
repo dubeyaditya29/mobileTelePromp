@@ -1,6 +1,5 @@
 import type { TeleprompterSettings } from '../types'
-import { APP_NAME, APP_TAGLINE, ADSENSE_SLOT_EDITOR } from '../lib/brand'
-import { AdSlot } from './AdSlot'
+import { APP_NAME, APP_TAGLINE } from '../lib/brand'
 
 interface ScriptEditorProps {
   title: string
@@ -147,8 +146,6 @@ export function ScriptEditor({
           Open recorder
         </button>
       </div>
-
-      <AdSlot slot={ADSENSE_SLOT_EDITOR} className="ad-slot-editor" />
 
       <nav className="footer-links">
         <button type="button" className="linkish" onClick={onOpenAbout}>

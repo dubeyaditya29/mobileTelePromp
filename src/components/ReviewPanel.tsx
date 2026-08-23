@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { saveBlob, shareBlob } from '../lib/download'
-import { ADSENSE_SLOT_REVIEW } from '../lib/brand'
-import { AdSlot } from './AdSlot'
 
 interface ReviewPanelProps {
   blob: Blob
@@ -74,8 +72,6 @@ export function ReviewPanel({
       </header>
 
       {url && <video className="review-video" src={url} controls playsInline />}
-
-      <AdSlot slot={ADSENSE_SLOT_REVIEW} className="ad-slot-review" />
 
       {saveNote && <p className="hint save-note">{saveNote}</p>}
 

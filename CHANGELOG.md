@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- Google AdSense integration: loader, Editor/Review ad slots, `ads.txt`, env vars (`VITE_ADSENSE_*`), and the setup guide. Monetization will move to payment gateways in a future release.
+
 ## [0.2.0] — 2026-07-29
 
 ### Changed
@@ -20,8 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optional AdSense loader + Editor/Review ad slots (env-gated)
 - About and Privacy pages
 - AdSense setup guide in `docs/adsense-setup.md`
-
-## [0.1.0] — 2026-07-29
 
 ## [0.1.0] — 2026-07-29
 

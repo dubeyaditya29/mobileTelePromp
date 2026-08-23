@@ -770,15 +770,6 @@
   margin: 0 0 1rem;
 }
 
-.ad-slot {
-  margin: 1rem 0;
-  min-height: 90px;
-  overflow: hidden;
-  border: 2px dashed rgba(74, 46, 32, 0.4);
-  border-radius: 14px;
-  background: transparent;
-}
-
 .footer-links {
   display: flex;
   gap: 1rem;

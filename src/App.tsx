@@ -4,7 +4,6 @@ import { RecorderView } from './components/RecorderView'
 import { ReviewPanel } from './components/ReviewPanel'
 import { OnboardingGate } from './components/OnboardingGate'
 import { InfoPage } from './components/InfoPage'
-import { AdSenseLoader } from './components/AdSenseLoader'
 import { loadScript, saveScript } from './lib/storage'
 import type { AppView, ScriptState, TeleprompterSettings } from './types'
 import './App.css'
@@ -40,7 +39,6 @@ function App() {
 
   return (
     <div className={`app app-${view}`}>
-      <AdSenseLoader />
       <OnboardingGate />
 
       {view === 'edit' && (
