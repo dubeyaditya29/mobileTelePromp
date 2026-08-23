@@ -14,6 +14,8 @@ interface ScriptEditorProps {
   onOpenPrivacy: () => void
 }
 
+const TICKER_TEXT = 'Write • Scroll • Record • Free in your browser • '.repeat(4)
+
 export function ScriptEditor({
   title,
   body,
@@ -29,6 +31,12 @@ export function ScriptEditor({
 
   return (
     <section className="panel editor">
+      <div className="ticker" aria-hidden="true">
+        <p className="ticker-track">
+          <span>{TICKER_TEXT}</span>
+          <span>{TICKER_TEXT}</span>
+        </p>
+      </div>
       <header className="panel-header">
         <div>
           <p className="eyebrow">{APP_NAME}</p>

@@ -1,19 +1,29 @@
 :root {
   color-scheme: dark;
-  --bg: #0f1210;
-  --bg-elevated: #171b18;
-  --bg-soft: #1f2621;
-  --ink: #f3f0e8;
-  --muted: #a8b0a6;
-  --line: rgba(243, 240, 232, 0.12);
-  --accent: #d4a35c;
-  --accent-ink: #1a1408;
-  --danger: #e25b4c;
-  --live: #ff5a5a;
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  --radius: 18px;
-  --font-display: 'Fraunces', Georgia, serif;
+
+  /* 70s groovy palette — espresso, cream, burnt orange, mustard, avocado */
+  --bg: #2a1a12;
+  --bg-deep: #1f120c;
+  --cream: #f8edd8;
+  --paper: #fffaf0;
+  --ink: #38221a;
+  --muted: #86695a;
+  --line: rgba(56, 34, 26, 0.28);
+  --line-cream: rgba(248, 237, 216, 0.24);
+  --accent: #e8632c;
+  --accent-deep: #b3402a;
+  --gold: #f2b63b;
+  --avocado: #97a650;
+  --live: #ff5a3c;
+  --danger: #cf4526;
+
+  --shadow-hard: 0 10px 0 rgba(15, 8, 4, 0.4);
+  --shadow-chip: 0 4px 0 #4a2e20;
+  --radius: 24px;
+
+  --font-display: 'Shrikhand', Georgia, serif;
   --font-body: 'Outfit', 'Segoe UI', sans-serif;
+
   font-family: var(--font-body);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -36,9 +46,22 @@ body,
 body {
   min-height: 100dvh;
   background:
-    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(212, 163, 92, 0.18), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(88, 120, 98, 0.2), transparent 50%),
+    radial-gradient(ellipse 70% 45% at 12% -8%, rgba(242, 182, 59, 0.22), transparent 58%),
+    radial-gradient(ellipse 55% 40% at 105% 8%, rgba(232, 99, 44, 0.26), transparent 55%),
+    radial-gradient(ellipse 60% 42% at 50% 115%, rgba(151, 166, 80, 0.16), transparent 60%),
     var(--bg);
+  animation: bg-drift 18s ease-in-out infinite alternate;
+}
+
+/* Vintage print grain over everything */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 button,
@@ -54,4 +77,26 @@ button {
 
 #root {
   min-height: 100dvh;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+@keyframes bg-drift {
+  from {
+    background-position:
+      0% 0%,
+      100% 0%,
+      50% 100%,
+      0 0;
+  }
+  to {
+    background-position:
+      6% 4%,
+      92% 6%,
+      46% 94%,
+      0 0;
+  }
 }

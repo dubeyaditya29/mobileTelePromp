@@ -176,7 +176,7 @@ export function RecorderView({
         />
 
         {countdown !== null && (
-          <div className="countdown" aria-live="assertive">
+          <div className="countdown" aria-live="assertive" key={countdown}>
             {countdown}
           </div>
         )}

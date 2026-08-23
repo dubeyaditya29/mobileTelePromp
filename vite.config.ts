@@ -18,8 +18,8 @@ export default defineConfig({
         short_name: 'ScrollTake',
         description:
           'Record talking-head videos with a scrolling teleprompter script — right in your browser.',
-        theme_color: '#0f1210',
-        background_color: '#0f1210',
+        theme_color: '#2a1a12',
+        background_color: '#1f120c',
         display: 'standalone',
         orientation: 'any',
         start_url: '/',
