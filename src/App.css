@@ -465,6 +465,14 @@
   transform: scaleX(-1);
 }
 
+.camera-resolution {
+  position: absolute;
+  top: calc(3.75rem + env(safe-area-inset-top, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
 .recorder-overlay {
   position: relative;
   z-index: 1;
