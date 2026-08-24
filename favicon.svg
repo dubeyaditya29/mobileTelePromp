@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Mobile TelePromp">
+  <defs>
+    <linearGradient id="g" x1="16" y1="8" x2="112" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1f2621"/>
+      <stop offset="1" stop-color="#0f1210"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#g)"/>
+  <rect x="28" y="24" width="72" height="80" rx="12" fill="#f3f0e8"/>
+  <rect x="36" y="34" width="56" height="8" rx="4" fill="#d4a35c"/>
+  <rect x="36" y="50" width="56" height="6" rx="3" fill="#1f2621" opacity="0.85"/>
+  <rect x="36" y="62" width="44" height="6" rx="3" fill="#1f2621" opacity="0.65"/>
+  <rect x="36" y="74" width="50" height="6" rx="3" fill="#1f2621" opacity="0.45"/>
+  <circle cx="64" cy="96" r="5" fill="#d4a35c"/>
+</svg>
