@@ -141,6 +141,15 @@ export function RecorderView({
     <section className="recorder">
       <CameraPreview videoRef={camera.videoRef} facingMode={camera.facingMode} />
 
+      {camera.resolution && (
+        <span className="pill subtle camera-resolution">
+          {camera.resolution.width}×{camera.resolution.height}
+          {camera.resolution.frameRate
+            ? ` · ${Math.round(camera.resolution.frameRate)} fps`
+            : ''}
+        </span>
+      )}
+
       <div className="recorder-overlay" onWheel={handleSpeedWheel}>
         <header className="recorder-top">
           <button

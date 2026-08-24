@@ -8,9 +8,16 @@ interface UseCameraResult {
   error: string | null
   isReady: boolean
   facingMode: FacingMode
+  resolution: CameraResolution | null
   start: () => Promise<void>
   stop: () => void
   flipCamera: () => Promise<void>
+}
+
+export interface CameraResolution {
+  width: number
+  height: number
+  frameRate?: number
 }
 
 const VIDEO_CONSTRAINTS: MediaTrackConstraints = {
@@ -26,11 +33,13 @@ export function useCamera(initialFacing: FacingMode = 'user'): UseCameraResult {
   const [error, setError] = useState<string | null>(null)
   const [isReady, setIsReady] = useState(false)
   const [facingMode, setFacingMode] = useState<FacingMode>(initialFacing)
+  const [resolution, setResolution] = useState<CameraResolution | null>(null)
 
   const stop = useCallback(() => {
     streamRef.current?.getTracks().forEach((track) => track.stop())
     streamRef.current = null
     setStream(null)
+    setResolution(null)
     setIsReady(false)
   }, [])
 
@@ -44,6 +53,25 @@ export function useCamera(initialFacing: FacingMode = 'user'): UseCameraResult {
       video.srcObject = next
       await video.play()
       setIsReady(true)
+    }
+
+    // Some devices ignore resolution hints on the initial getUserMedia and
+    // hand back 640x480; re-apply once the track is live, then read what
+    // the hardware actually provides.
+    const track = next.getVideoTracks()[0]
+    if (!track) return
+    try {
+      await track.applyConstraints(VIDEO_CONSTRAINTS)
+    } catch {
+      // keep whatever the device can provide
+    }
+    const settings = track.getSettings()
+    if (settings.width && settings.height) {
+      setResolution({
+        width: settings.width,
+        height: settings.height,
+        frameRate: settings.frameRate,
+      })
     }
   }, [])
 
@@ -101,6 +129,7 @@ export function useCamera(initialFacing: FacingMode = 'user'): UseCameraResult {
     error,
     isReady,
     facingMode,
+    resolution,
     start,
     stop,
     flipCamera,
