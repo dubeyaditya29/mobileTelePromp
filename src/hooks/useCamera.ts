@@ -13,6 +13,12 @@ interface UseCameraResult {
   flipCamera: () => Promise<void>
 }
 
+const VIDEO_CONSTRAINTS: MediaTrackConstraints = {
+  width: { ideal: 3840 },
+  height: { ideal: 2160 },
+  frameRate: { ideal: 30 },
+}
+
 export function useCamera(initialFacing: FacingMode = 'user'): UseCameraResult {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
@@ -54,8 +60,7 @@ export function useCamera(initialFacing: FacingMode = 'user'): UseCameraResult {
         audio: true,
         video: {
           facingMode,
-          width: { ideal: 1920 },
-          height: { ideal: 1080 },
+          ...VIDEO_CONSTRAINTS,
         },
       })
       await attachStream(next)
@@ -79,8 +84,7 @@ export function useCamera(initialFacing: FacingMode = 'user'): UseCameraResult {
         audio: true,
         video: {
           facingMode: nextFacing,
-          width: { ideal: 1920 },
-          height: { ideal: 1080 },
+          ...VIDEO_CONSTRAINTS,
         },
       })
       await attachStream(next)

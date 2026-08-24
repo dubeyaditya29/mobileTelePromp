@@ -3,6 +3,16 @@ import { extensionForMime, pickRecorderMimeType } from '../lib/mime'
 
 export type RecorderStatus = 'idle' | 'recording' | 'stopped'
 
+function videoBitrateFor(stream: MediaStream): number {
+  const settings = stream.getVideoTracks()[0]?.getSettings() ?? {}
+  const longest = Math.max(settings.width ?? 0, settings.height ?? 0)
+  if (longest === 0) return 10_000_000
+  if (longest >= 3800) return 35_000_000
+  if (longest >= 1900) return 12_000_000
+  if (longest >= 1200) return 6_000_000
+  return 3_500_000
+}
+
 interface UseMediaRecorderResult {
   status: RecorderStatus
   blob: Blob | null
@@ -50,9 +60,12 @@ export function useMediaRecorder(): UseMediaRecorderResult {
     setMimeType(selectedMime)
 
     try {
-      const recorder = selectedMime
-        ? new MediaRecorder(stream, { mimeType: selectedMime })
-        : new MediaRecorder(stream)
+      const options: MediaRecorderOptions = {
+        videoBitsPerSecond: videoBitrateFor(stream),
+        audioBitsPerSecond: 128_000,
+      }
+      if (selectedMime) options.mimeType = selectedMime
+      const recorder = new MediaRecorder(stream, options)
 
       recorder.ondataavailable = (event) => {
         if (event.data.size > 0) chunksRef.current.push(event.data)
